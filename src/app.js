@@ -48,7 +48,7 @@
    changeTextBtn.addEventListener("click", () => {
    changeGreetingText();
        const randomSongNumber = Math.floor(Math.random() * 3) + 1;
-       const audio = new Audio(`/src/${randomSongNumber}.mp3`);
+       const audio = new Audio(`./src/${randomSongNumber}.mp3`);
        audio.play();
        startMoving();
        count();
