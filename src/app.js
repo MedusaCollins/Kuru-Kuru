@@ -5,7 +5,7 @@
  const settingsMenu = document.getElementById("myModal");
  const counterDiv = document.getElementById("counter");
  var newGreeting = "";
- var ImgGif = "/src/img/hertaa.gif";
+ var ImgGif = "./src/img/hertaa.gif";
  var counter = 0;
  var speed = 2;
 
