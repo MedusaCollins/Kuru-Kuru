@@ -7,6 +7,13 @@
     <link rel="icon" href="/src/img/hertaa.gif" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+      /* Toggle A */
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
+}
+    </style>
 <body class="w-full h-full m-0 overflow-hidden bg-red-100" id="body">
         <div class="w-full h-full -mt-12 flex justify-center text-center mx-2 fixed items-center z-0">
             <div class="relative p-4 flex-col mx-auto my-auto" id="textColor">
@@ -45,6 +52,24 @@
                     <tr>
                       <td><input type="text" class="border" id="hoverButtonTextInput" placeholder="Button Hover Text Color"></td>
                     </tr>
+                  </table>
+                  <p id="modalText" class="text-xl mt-4">Character</p>
+                  <table class="table-auto text-center sm:text-left border-separate">
+                      <tr>
+                        <div class="flex items-center justify-center w-full">
+                          <div class="mr-3 text-gray-700 font-medium">Direction</div>
+                          <label for="toogleA" class="flex items-center cursor-pointer">
+                            <div class="relative">
+                              <input id="toogleA" type="checkbox" class="sr-only" />
+                              <!-- line -->
+                              <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                              <!-- dot -->
+                              <div class="dot absolute w-6 h-6 bg-[#48bb78] rounded-full shadow -left-1 -top-1 transition"></div>
+                            </div>
+                          </label>
+                        </div>
+                      </tr>
+                      <td><input type="text" class="border" id="characterSpeed" placeholder="Char. speed default 2"></td>
                   </table>
                 <div class="flex gap-5 items-center justify-center mt-5">
                   <button class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-3 rounded font-semibold" onclick="closeModal()">CLOSE</button>

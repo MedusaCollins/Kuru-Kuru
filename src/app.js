@@ -5,7 +5,9 @@
  const settingsMenu = document.getElementById("myModal");
  const counterDiv = document.getElementById("counter");
  var newGreeting = "";
+ var ImgGif = "/src/img/hertaa.gif";
  var counter = 0;
+ var speed = 2;
 
 
  function applyStyles() {
@@ -22,6 +24,8 @@
  localStorage.setItem('buttonTextInput', document.getElementById('buttonTextInput').value);
  localStorage.setItem('hoverButtonInput', document.getElementById('hoverButtonInput').value);
  localStorage.setItem('hoverButtonTextInput', document.getElementById('hoverButtonTextInput').value);
+ localStorage.setItem('charSpeed', document.getElementById('characterSpeed').value);
+ 
  }
 
    changeTextBtn.addEventListener('mouseout', function () {
@@ -59,21 +63,40 @@
    // Prompt the user for a new greeting
    if(randomInRange > 2){
        newGreeting = "The kuru~ has been squished for";
-       direction = true;
    }else{
        newGreeting = "Herta has been kuru~ed for";
-       direction = false;
    }
 
    // Update the text content of the h1 element with the new greeting
    greetingElement.textContent = newGreeting;
    }
 
-   var direction;
+   const toggleButton = document.getElementById("toogleA");
+   const dot = document.querySelector(".dot");
+ 
+   // Sayfa yüklendiğinde local storage'dan durumu alıyoruz (eğer varsa).
+   if (localStorage.getItem("toggleStatus") === "true") {
+     toggleButton.checked = true;
+     direction = toggleButton.checked;
+   }
+ 
+   toggleButton.addEventListener("click", function () {
+     if (toggleButton.checked) {
+       direction = true;
+     } else {
+       direction = false;
+     }
+ 
+     // Toggle düğmesinin durumunu local storage'a kaydediyoruz.
+     localStorage.setItem("toggleStatus", toggleButton.checked);
+   });
+
    var gifList = []; // Bu dizi, her GIF için yön bilgisini saklayacak
    function startMoving() {
+    direction = toggleButton.checked;
+    speed = localStorage.getItem('charSpeed');
 const gifImage = new Image();
-gifImage.src = "/src/img/hertaa.gif"; // Replace with the actual path to your GIF image
+gifImage.src = ImgGif; // Replace with the actual path to your GIF image
 
 gifImage.style.position = "absolute";
 gifImage.className = "animate-bounce";
@@ -125,7 +148,7 @@ if (direction) {
 }
 
 // Hareketi başlat
-const intervalId = setInterval(moveImage, 2); // Interval hızını isteğe bağlı olarak ayarlayabilirsiniz
+const intervalId = setInterval(moveImage, speed); // Interval hızını isteğe bağlı olarak ayarlayabilirsiniz
 }
 
 // İlgili input elementlerine "input" event dinleyicileri ekleyin
@@ -135,6 +158,7 @@ document.getElementById('buttonInput').addEventListener('input', applyStyles);
 document.getElementById('buttonTextInput').addEventListener('input', applyStyles);
 document.getElementById('hoverButtonInput').addEventListener('input', applyStyles);
 document.getElementById('hoverButtonTextInput').addEventListener('input', applyStyles);
+document.getElementById('characterSpeed').addEventListener('input', applyStyles);
 
      document.addEventListener('DOMContentLoaded', () =>{
       document.getElementById('body').style.backgroundColor = localStorage.getItem('backgroundInput');
@@ -152,7 +176,10 @@ document.getElementById('hoverButtonTextInput').addEventListener('input', applyS
       document.getElementById('hoverButtonInput').value = localStorage.getItem('hoverButtonInput');
       document.getElementById('hoverButtonTextInput').value = localStorage.getItem('hoverButtonTextInput');
 
-
+      document.getElementById('characterSpeed').value = localStorage.getItem('charSpeed');
+      
+      speed = localStorage.getItem('charSpeed');
+      direction = localStorage.getItem('toggleStatus');
        counter = localStorage.getItem('clicked')
        counterDiv.textContent = counter;
      })
